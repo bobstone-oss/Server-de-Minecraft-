@@ -190,6 +190,37 @@
         .post-content {
             color: var(--mc-light);
             font-size: 0.95rem;
+            margin-bottom: 10px;
+        }
+
+        .post-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .like-btn {
+            background-color: transparent;
+            border: 2px solid var(--mc-green);
+            color: #55ff55;
+            padding: 6px 12px;
+            font-size: 0.7rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+
+        .like-btn:hover {
+            background-color: var(--mc-green);
+            color: white;
+        }
+
+        .like-btn.liked {
+            background-color: var(--mc-green);
+            color: white;
         }
 
         footer {
@@ -251,6 +282,13 @@
                 <div class="post-item">
                     <div class="post-author">Alex_Redstone</div>
                     <div class="post-content">¡Hola a todos! Recuerden que las granjas de hierro automáticas siguen funcionando excelente en la última versión si se alinean bien con los aldeanos.</div>
+                    <div class="post-actions">
+                        <button type="button" class="like-btn" data-likes="3">
+                            <span class="like-icon">💎</span>
+                            <span class="like-text">Valorar</span>
+                            <span class="like-count">3</span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -264,6 +302,31 @@
         // Funcionalidad JavaScript para añadir publicaciones interactivas
         const form = document.getElementById('infoForm');
         const postsFeed = document.getElementById('postsFeed');
+
+        // Función para adjuntar el comportamiento de valoración/likes
+        function setupLikeButton(button) {
+            button.addEventListener('click', function() {
+                let currentLikes = parseInt(button.getAttribute('data-likes') || '0', 10);
+                const isLiked = button.classList.contains('liked');
+
+                if (isLiked) {
+                    currentLikes = Math.max(0, currentLikes - 1);
+                    button.classList.remove('liked');
+                } else {
+                    currentLikes += 1;
+                    button.classList.add('liked');
+                }
+
+                button.setAttribute('data-likes', currentLikes);
+                const countSpan = button.querySelector('.like-count');
+                if (countSpan) {
+                    countSpan.textContent = currentLikes;
+                }
+            });
+        }
+
+        // Configurar botones de valoración iniciales
+        document.querySelectorAll('.like-btn').forEach(setupLikeButton);
 
         form.addEventListener('submit', function(e) {
             e.preventDefault();
@@ -284,8 +347,37 @@
                 postContent.classList.add('post-content');
                 postContent.textContent = content;
 
+                const postActions = document.createElement('div');
+                postActions.classList.add('post-actions');
+
+                const likeBtn = document.createElement('button');
+                likeBtn.type = 'button';
+                likeBtn.className = 'like-btn';
+                likeBtn.setAttribute('data-likes', '0');
+
+                const likeIcon = document.createElement('span');
+                likeIcon.className = 'like-icon';
+                likeIcon.textContent = '💎';
+
+                const likeText = document.createElement('span');
+                likeText.className = 'like-text';
+                likeText.textContent = 'Valorar';
+
+                const likeCount = document.createElement('span');
+                likeCount.className = 'like-count';
+                likeCount.textContent = '0';
+
+                likeBtn.appendChild(likeIcon);
+                likeBtn.appendChild(likeText);
+                likeBtn.appendChild(likeCount);
+
+                setupLikeButton(likeBtn);
+
+                postActions.appendChild(likeBtn);
+
                 postItem.appendChild(postAuthor);
                 postItem.appendChild(postContent);
+                postItem.appendChild(postActions);
 
                 // Agregar el post al inicio de la lista
                 postsFeed.prepend(postItem);
