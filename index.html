@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft Hub - Comunidad y Versiones</title>
+    <!-- Importar fuente pixelada estilo Minecraft -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --mc-dark: #121212;
+            --mc-darker: #0a0a0a;
+            --mc-green: #3c8527;
+            --mc-green-hover: #55a034;
+            --mc-stone: #373737;
+            --mc-light: #ffffff;
+            --mc-gray: #b0b0b0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--mc-dark);
+            color: var(--mc-light);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1627856013091-fed6e4e304ca?q=80&w=1920&auto=format&fit=crop') no-repeat center center/cover;
+            padding: 60px 20px;
+            text-align: center;
+            border-bottom: 4px solid var(--mc-green);
+        }
+
+        h1, h2, h3 {
+            font-family: 'Press Start 2P', cursive;
+            color: var(--mc-light);
+            text-shadow: 3px 3px #000;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            color: #55ff55;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            color: var(--mc-gray);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            border-left: 6px solid var(--mc-green);
+            padding-left: 12px;
+        }
+
+        /* Cuadrícula de Versiones */
+        .versions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+
+        .version-card {
+            background-color: var(--mc-stone);
+            border: 3px solid #222;
+            border-radius: 6px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .version-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--mc-green);
+        }
+
+        .version-card h3 {
+            font-size: 1rem;
+            margin-bottom: 10px;
+            color: #ffff55;
+        }
+
+        .version-card p {
+            color: var(--mc-gray);
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: var(--mc-green);
+            color: white;
+            padding: 4px 8px;
+            font-size: 0.75rem;
+            font-family: 'Press Start 2P', cursive;
+            border-radius: 3px;
+        }
+
+        /* Sección de Compartir Información */
+        .community-section {
+            background-color: var(--mc-darker);
+            border: 2px solid #333;
+            padding: 30px;
+            border-radius: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--mc-gray);
+        }
+
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--mc-dark);
+            border: 2px solid var(--mc-stone);
+            color: var(--mc-light);
+            border-radius: 4px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+        }
+
+        input[type="text"]:focus, textarea:focus {
+            outline: none;
+            border-color: var(--mc-green);
+        }
+
+        textarea {
+            resize: vertical;
+            height: 100px;
+        }
+
+        button {
+            background-color: var(--mc-green);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.8rem;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: var(--mc-green-hover);
+        }
+
+        /* Muro de publicaciones de la comunidad */
+        .posts-feed {
+            margin-top: 30px;
+        }
+
+        .post-item {
+            background-color: var(--mc-stone);
+            border-left: 4px solid #ffff55;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+        }
+
+        .post-author {
+            font-weight: 700;
+            color: #55ff55;
+            margin-bottom: 5px;
+            font-size: 0.95rem;
+        }
+
+        .post-content {
+            color: var(--mc-light);
+            font-size: 0.95rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            background-color: var(--mc-darker);
+            color: #666;
+            font-size: 0.85rem;
+            margin-top: 50px;
+            border-top: 2px solid #222;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>MINECRAFT HUB</h1>
+        <p>Tu portal para descubrir nuevas versiones y compartir información con la comunidad.</p>
+    </header>
+
+    <div class="container">
+        <!-- Últimas Versiones -->
+        <h2 class="section-title">Nuevas Versiones</h2>
+        <div class="versions-grid">
+            <div class="version-card">
+                <h3>Java Edition 1.21</h3>
+                <p>La actualización "Tricky Trials". Explora las nuevas cámaras de pruebas, enfréntate al Breeze y descubre el mazo.</p>
+                <span class="badge">Última</span>
+            </div>
+            <div class="version-card">
+                <h3>Bedrock Edition 1.20.80</h3>
+                <p>Novedades en juego cruzado, ajustes de rendimiento, corrección de errores y características experimentales.</p>
+                <span class="badge" style="background-color: #007acc;">Estable</span>
+            </div>
+            <div class="version-card">
+                <h3>Próxima Snapshot</h3>
+                <p>Descubre los experimentos en curso, mobs en desarrollo y funciones anticipadas para los próximos parches.</p>
+                <span class="badge" style="background-color: #aa00aa;">Experimental</span>
+            </div>
+        </div>
+
+        <!-- Zona de Comunidad e Información -->
+        <div class="community-section">
+            <h2 class="section-title">Comparte con la Comunidad</h2>
+            <form id="infoForm">
+                <div class="form-group">
+                    <label for="userName">Tu Nombre / Gamertag:</label>
+                    <input type="text" id="userName" placeholder="Ej. Steve_Builder" required>
+                </div>
+                <div class="form-group">
+                    <label for="userPost">Información, truco o noticia:</label>
+                    <textarea id="userPost" placeholder="Comparte un dato curioso, semilla o consejo de construcción..." required></textarea>
+                </div>
+                <button type="submit">Publicar Dato</button>
+            </form>
+
+            <div class="posts-feed" id="postsFeed">
+                <!-- Las publicaciones aparecerán aquí dinámicamente -->
+                <div class="post-item">
+                    <div class="post-author">Alex_Redstone</div>
+                    <div class="post-content">¡Hola a todos! Recuerden que las granjas de hierro automáticas siguen funcionando excelente en la última versión si se alinean bien con los aldeanos.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Minecraft Hub Informativo. Creado para entusiastas del juego.</p>
+    </footer>
+
+    <script>
+        // Funcionalidad JavaScript para añadir publicaciones interactivas
+        const form = document.getElementById('infoForm');
+        const postsFeed = document.getElementById('postsFeed');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('userName').value.trim();
+            const content = document.getElementById('userPost').value.trim();
+
+            if (name && content) {
+                // Crear elemento visual para el post
+                const postItem = document.createElement('div');
+                postItem.classList.add('post-item');
+
+                const postAuthor = document.createElement('div');
+                postAuthor.classList.add('post-author');
+                postAuthor.textContent = name;
+
+                const postContent = document.createElement('div');
+                postContent.classList.add('post-content');
+                postContent.textContent = content;
+
+                postItem.appendChild(postAuthor);
+                postItem.appendChild(postContent);
+
+                // Agregar el post al inicio de la lista
+                postsFeed.prepend(postItem);
+
+                // Limpiar el formulario
+                form.reset();
+            }
+        });
+    </script>
+</body>
+</html>
